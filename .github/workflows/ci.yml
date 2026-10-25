@@ -1,0 +1,30 @@
+# Checks every cask on a change: Homebrew's style and its online audit (URL, checksum, metadata).
+name: ci
+
+on:
+  push:
+    branches: [main]
+    paths: ["Casks/**", ".github/workflows/ci.yml"]
+  pull_request:
+    paths: ["Casks/**", ".github/workflows/ci.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: macos-latest
+    timeout-minutes: 20
+    steps:
+      - name: Set up Homebrew with this tap
+        id: homebrew
+        uses: Homebrew/actions/setup-homebrew@d482da0e602890d3160aade42e72c8556103bf04 # main
+      - name: Style
+        run: brew style --cask gaerae/tap
+      - name: Audit
+        run: brew audit --cask --strict --online --tap gaerae/tap
