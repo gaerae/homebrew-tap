@@ -1,6 +1,6 @@
 cask "playpets" do
-  version "1.7.0"
-  sha256 "c1ab9b273f57669b6f29dbc5c27ad3a5097467dc6734c835a3c4d42ec53a9205"
+  version "1.7.1"
+  sha256 "411c87f18cc55a237c19557ffc22bb1789d018721e6de346b9f1987ba92a5493"
 
   url "https://github.com/gaerae/playpets/releases/download/v#{version}/PlayPets_#{version}_macos-universal.dmg"
   name "PlayPets"
